@@ -1,0 +1,126 @@
+<!-- 订单创建页 -->
+<view class="container">
+  <!-- 加载状态 -->
+  <block wx:if="{{loading}}">
+    <view class="loading-container">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">加载中...</text>
+    </view>
+  </block>
+
+  <block wx:else>
+    <!-- 装饰元素 -->
+    <image class="decoration decoration-top-right" src="/images/decoration/flower.png" mode="aspectFit"></image>
+    <image class="decoration decoration-bottom-left" src="/images/decoration/flower.png" mode="aspectFit"></image>
+    
+    <view class="content">
+      <!-- 相机信息区域 -->
+      <view class="section-title">相机信息</view>
+      <view class="camera-info-section">
+        <view class="camera-info">
+          <image class="camera-image" src="{{camera.imageUrl}}" mode="aspectFill"></image>
+          <view class="camera-details">
+            <view class="camera-name">{{camera.name}}</view>
+            <view class="camera-price">￥{{camera.price}}/天起</view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 日期选择区域 -->
+      <view class="section-title">租赁日期</view>
+      <view class="date-section">
+        <view class="date-picker-container">
+          <view class="date-row">
+            <view class="date-label">开始日期</view>
+            <picker class="date-picker" mode="date" value="{{startDate}}" start="{{today}}" end="{{maxDate}}" bindchange="bindStartDateChange">
+              <view class="picker-content">
+                <text>{{startDate || '请选择开始日期'}}</text>
+                <view class="picker-arrow"></view>
+              </view>
+            </picker>
+          </view>
+          
+          <view class="date-row">
+            <view class="date-label">结束日期</view>
+            <picker class="date-picker" mode="date" value="{{endDate}}" start="{{startDate || today}}" end="{{maxDate}}" bindchange="bindEndDateChange">
+              <view class="picker-content">
+                <text>{{endDate || '请选择结束日期'}}</text>
+                <view class="picker-arrow"></view>
+              </view>
+            </picker>
+          </view>
+        </view>
+
+        <view wx:if="{{startDate && endDate}}" class="selected-dates-tip">
+          <text>
+            <text class="tip-title">已选：</text>{{rentalDays}}天（{{startDate}} 至 {{endDate}}）
+          </text>
+          <text wx:if="{{hasDateConflict}}" style="color: #ff4d4f;">日期冲突!</text>
+        </view>
+
+        <view wx:if="{{camera.unavailableDates && camera.unavailableDates.length > 0}}" class="unavailable-dates-tip">
+          <text class="tip-title">已预订日期：</text>{{formattedUnavailableDates}}
+        </view>
+      </view>
+
+      <!-- 租金计算区域 -->
+      <view wx:if="{{startDate && endDate}}" class="rental-summary">
+        <view class="summary-title">租金计算</view>
+        <view class="summary-content">
+          <view class="summary-row">
+            <text>租赁天数</text>
+            <text>{{rentalDays}}天</text>
+          </view>
+          <view class="summary-row">
+            <text>日租金</text>
+            <text>￥{{dailyRate}}</text>
+          </view>
+          <view class="summary-row total">
+            <text>总计金额</text>
+            <text class="summary-value price">￥{{totalAmount}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 上门取件信息区域 -->
+      <view class="section-title">上门取件信息</view>
+      <view class="pickup-info-section">
+        <view class="pickup-form">
+          <view class="form-item">
+            <text class="form-label">姓名</text>
+            <input class="form-input" placeholder="请输入您的姓名" value="{{name}}" bindinput="bindNameInput" />
+          </view>
+          <view class="form-item">
+            <text class="form-label">手机号码</text>
+            <input class="form-input" type="number" placeholder="请输入您的手机号码" value="{{phone}}" bindinput="bindPhoneInput" />
+          </view>
+          <view class="form-item">
+            <text class="form-label">备注信息 (选填)</text>
+            <textarea class="form-textarea" placeholder="如有特殊需求，请在此说明" maxlength="100" value="{{remark}}" bindinput="bindRemarkInput"></textarea>
+            <view class="textarea-counter">{{remarkLength || 0}}/100</view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 订单信息区域 -->
+      <view class="section-title">订单信息</view>
+      <view class="order-info-section">
+        <view class="summary-content">
+          <view class="summary-row">
+            <text>订单状态</text>
+            <text>预约确认后支付</text>
+          </view>
+          <view class="summary-row">
+            <text>付款方式</text>
+            <text>线下支付</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 提交按钮 -->
+    <button class="submit-btn" disabled="{{!startDate || !endDate || hasDateConflict || submitting}}" bindtap="submitOrder">
+      {{submitting ? '提交中...' : '提交订单'}}
+    </button>
+  </block>
+</view> 

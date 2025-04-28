@@ -1,0 +1,140 @@
+<!-- 订单详情页面 -->
+<view class="container">
+  <!-- 加载状态 -->
+  <view class="loading-container" wx:if="{{isLoading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+  
+  <!-- 错误提示 -->
+  <view class="error-container" wx:elif="{{hasError}}">
+    <icon type="warn" size="45" color="#ff6b00"></icon>
+    <text class="error-text">{{errorMsg || '获取订单详情失败，请重试'}}</text>
+    <button class="retry-btn" bindtap="loadOrderDetail" data-id="{{orderId}}">重新加载</button>
+    <button class="back-btn" bindtap="navigateBack">返回上一页</button>
+  </view>
+  
+  <!-- 订单详情 -->
+  <view class="order-detail" wx:elif="{{order}}">
+    <!-- 返回按钮 -->
+    <view class="nav-bar">
+      <view class="back-btn" bindtap="navigateBack">
+        <view class="back-arrow"></view>
+      </view>
+      <view class="page-title">订单详情</view>
+    </view>
+    
+    <!-- 订单状态条 -->
+    <view class="status-bar">
+      <view class="status-icon {{order.status}}">
+        <icon type="{{order.status === 'completed' ? 'success' : (order.status === 'cancelled' ? 'warn' : 'waiting')}}" 
+              size="24" 
+              color="{{order.status === 'completed' ? '#52c41a' : (order.status === 'cancelled' ? '#f5222d' : '#ff6b00')}}"></icon>
+      </view>
+      <view class="status-text">{{statusMap[order.status] || '未知状态'}}</view>
+    </view>
+    
+    <!-- 相机信息 -->
+    <view class="detail-section">
+      <view class="section-title">相机信息</view>
+      <view class="camera-info">
+        <image class="camera-image" src="{{order.cameraImage || '/images/default-camera.png'}}" mode="aspectFill"></image>
+        <view class="camera-details">
+          <text class="camera-name">{{order.cameraName || '未知相机'}}</text>
+          <text class="camera-id">ID: {{order.cameraId}}</text>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 租赁信息 -->
+    <view class="detail-section">
+      <view class="section-title">租赁信息</view>
+      <view class="info-list">
+        <view class="info-item">
+          <text class="info-label">租赁时间</text>
+          <text class="info-value">{{order.startDate}} ~ {{order.endDate}}</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">租赁天数</text>
+          <text class="info-value">{{order.rentalDays}}天</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">单日租金</text>
+          <text class="info-value">¥{{order.dailyPrice}}/天</text>
+        </view>
+        <view class="info-item total">
+          <text class="info-label">总价</text>
+          <text class="info-value price">¥{{order.totalPrice}}</text>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 上门取件信息 -->
+    <view class="detail-section">
+      <view class="section-title">上门取件信息</view>
+      <view class="info-list">
+        <view class="info-item">
+          <text class="info-label">姓名</text>
+          <text class="info-value">{{order.userName}}</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">手机号</text>
+          <text class="info-value">{{order.phone}}</text>
+        </view>
+        <view class="info-item" wx:if="{{order.note}}">
+          <text class="info-label">备注</text>
+          <text class="info-value note">{{order.note}}</text>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 订单信息 -->
+    <view class="detail-section">
+      <view class="section-title">订单信息</view>
+      <view class="info-list">
+        <view class="info-item">
+          <text class="info-label">订单编号</text>
+          <text class="info-value">{{order._id}}</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">创建时间</text>
+          <text class="info-value">{{order.createTimeFormatted || '未知'}}</text>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 商户联系方式 -->
+    <view class="detail-section">
+      <view class="section-title">商户联系方式</view>
+      <view class="merchant-info">
+        <block wx:if="{{loadingMerchantInfo}}">
+          <view class="loading-mini">加载中...</view>
+        </block>
+        <block wx:elif="{{merchantInfo}}">
+          <view class="info-list">
+            <view class="info-item">
+              <text class="info-label">联系电话</text>
+              <text class="info-value">{{merchantInfo.phone}}</text>
+            </view>
+            <view class="info-item" wx:if="{{merchantInfo.wechat}}">
+              <text class="info-label">微信号</text>
+              <text class="info-value">{{merchantInfo.wechat}}</text>
+            </view>
+            <view class="info-item" wx:if="{{merchantInfo.note}}">
+              <text class="info-label">备注说明</text>
+              <text class="info-value note">{{merchantInfo.note}}</text>
+            </view>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="empty-merchant-info">暂无商户联系方式</view>
+        </block>
+      </view>
+    </view>
+    
+    <!-- 操作区域 -->
+    <view class="action-section" wx:if="{{order.status === 'reserved' || order.status === 'pending_payment' || order.status === 'pending'}}">
+      <button class="cancel-btn" bindtap="cancelOrder">取消预约</button>
+    </view>
+  </view>
+</view> 

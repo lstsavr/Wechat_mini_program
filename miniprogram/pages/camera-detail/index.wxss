@@ -1,0 +1,808 @@
+/* pages/camera-detail/index.wxss */
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #FAFAFA;
+  padding-bottom: 160rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* 返回按钮 */
+.back-btn {
+  position: fixed;
+  top: 40rpx;
+  left: 30rpx;
+  z-index: 100;
+  width: 60rpx;
+  height: 60rpx;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.back-btn:active {
+  transform: scale(0.95);
+}
+
+.back-icon {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+/* 加载状态 */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+}
+
+.loading-spinner {
+  width: 60rpx;
+  height: 60rpx;
+  border: 4rpx solid #F1B7C6;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  margin-top: 20rpx;
+  font-size: 28rpx;
+  color: #999;
+}
+
+/* 错误状态 */
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  padding: 0 30rpx;
+}
+
+.error-icon {
+  margin-bottom: 20rpx;
+  color: #F1B7C6;
+}
+
+.error-message {
+  font-size: 28rpx;
+  color: #666;
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+
+.btn-retry {
+  padding: 15rpx 40rpx;
+  background-color: #F1B7C6;
+  color: white;
+  font-size: 28rpx;
+  border-radius: 30rpx;
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+/* 内容区域 */
+.content-with-footer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 30rpx;
+  padding-bottom: 20rpx;
+}
+
+/* 卡片通用样式 */
+.card {
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  margin-bottom: 30rpx;
+  padding: 0;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.3s ease;
+}
+
+.card-title {
+  padding: 24rpx 30rpx;
+  position: relative;
+  border-bottom: 1rpx solid #f5f5f5;
+  margin-bottom: 10rpx;
+}
+
+.title-text {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+  position: relative;
+  padding-left: 20rpx;
+}
+
+.title-text::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6rpx;
+  height: 28rpx;
+  background-color: #F1B7C6; /* 淡粉色 */
+  border-radius: 3rpx;
+}
+
+/* 相机卡片 */
+.camera-card {
+  border-radius: var(--border-radius);
+  background-color: var(--card-background);
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  position: relative;
+}
+
+.camera-image {
+  width: 100%;
+  height: 500rpx;
+  margin: 20rpx 0;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+  background-color: white;
+}
+
+.camera-image image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.camera-name {
+  font-size: 36rpx;
+  color: #333333;
+  font-weight: bold;
+  margin-bottom: 16rpx;
+  line-height: 1.4;
+}
+
+.camera-brand {
+  font-size: 28rpx;
+  color: #999999;
+  margin-bottom: 20rpx;
+}
+
+.camera-description {
+  font-size: 28rpx;
+  color: #666666;
+  line-height: 1.6;
+  margin-bottom: 16rpx;
+  letter-spacing: 0.02em;
+}
+
+.camera-price {
+  display: flex;
+  align-items: baseline;
+  margin-top: 10rpx;
+}
+
+.price-label {
+  font-size: 28rpx;
+  color: #666;
+  margin-right: 10rpx;
+}
+
+.price-value {
+  font-size: 38rpx;
+  color: #FF5777;
+  font-weight: 600;
+}
+
+.price-unit {
+  font-size: 24rpx;
+  color: #999;
+  margin-left: 5rpx;
+}
+
+/* 详情卡片 */
+.details-card {
+  background-color: white;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+}
+
+.card-title {
+  font-size: 32rpx;
+  color: #333333;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+  position: relative;
+  padding-left: 20rpx;
+}
+
+.card-title:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 32rpx;
+  width: 6rpx;
+  background-color: #F1B7C6;
+  border-radius: 3rpx;
+}
+
+/* 租赁规则 */
+.rental-rules {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.rule-item {
+  width: 48%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx;
+  margin-bottom: 15rpx;
+  background-color: rgba(241, 183, 198, 0.05);
+  border-radius: 12rpx;
+  border: 1px solid rgba(241, 183, 198, 0.1);
+}
+
+.rule-days {
+  font-size: 28rpx;
+  color: #666666;
+  font-weight: 500;
+}
+
+.rule-price {
+  font-size: 28rpx;
+  color: #F1B7C6;
+  font-weight: bold;
+}
+
+.price-highlight {
+  font-size: 30rpx;
+  color: #FF5777;
+  font-weight: 600;
+}
+
+/* 租赁须知 */
+.notice-list {
+  padding: 0 10rpx;
+}
+
+.notice-item {
+  font-size: 28rpx;
+  color: #666666;
+  line-height: 1.6;
+  margin-bottom: 20rpx;
+  position: relative;
+  padding-left: 24rpx;
+}
+
+.notice-item:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 12rpx;
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 50%;
+  background-color: #F1B7C6;
+}
+
+/* 底部栏 */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 120rpx;
+  background-color: white;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+  padding: 0 30rpx;
+  z-index: 10;
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.btn-rent {
+  width: 90%;
+  height: 80rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #F1B7C6, #FF7AA6);
+  color: white;
+  font-size: 32rpx;
+  font-weight: 500;
+  border-radius: 40rpx;
+  box-shadow: 0 6rpx 10rpx rgba(241, 183, 198, 0.3);
+  transition: transform 0.2s;
+  line-height: 80rpx;
+  text-align: center;
+  border: none;
+}
+
+.btn-rent:after {
+  border: none;
+}
+
+.btn-rent:active {
+  transform: scale(0.98);
+}
+
+/* 安全区域适配 */
+.safe-area-bottom {
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+}
+
+/* 轮播图 */
+.banner-swiper {
+  width: 100%;
+  height: 500rpx;
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+}
+
+/* 基本信息 */
+.info-section {
+  padding: 30rpx;
+  background-color: #fff;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+/* 价格区域 */
+.price-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20rpx;
+  padding: 20rpx 0;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.price-tag {
+  display: flex;
+  align-items: baseline;
+}
+
+.rent-btn {
+  background-color: #07c160;
+  color: #fff;
+  font-size: 28rpx;
+  width: 200rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 40rpx;
+  padding: 0;
+}
+
+/* 相机详情部分 */
+.camera-desc-section {
+  margin: 20rpx 0;
+  padding: 30rpx;
+  background-color: #fff;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.desc-content {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 30rpx;
+}
+
+.camera-specs {
+  margin-top: 20rpx;
+}
+
+.specs-item {
+  display: flex;
+  margin-bottom: 15rpx;
+  font-size: 28rpx;
+}
+
+.specs-label {
+  width: 180rpx;
+  color: #999;
+}
+
+.specs-value {
+  flex: 1;
+  color: #333;
+}
+
+/* 租赁须知部分 */
+.rental-notes-section {
+  padding: 30rpx;
+  background-color: #fff;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.notes-content {
+  margin-top: 10rpx;
+}
+
+.note-item {
+  margin-bottom: 25rpx;
+}
+
+.note-title {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.note-desc {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* 基本信息部分 */
+.price-rules-section {
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+.price-rule-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.price-rule-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.rule-label {
+  color: #666;
+  font-size: 14px;
+}
+
+.rule-value {
+  color: #ff6b00;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* 价格信息 */
+.price-info {
+  background-color: #fff;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.price-title {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.price-list {
+  margin-bottom: 30rpx;
+}
+
+.price-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 15rpx 0;
+  border-bottom: 1rpx dashed #eee;
+}
+
+.price-type {
+  font-size: 28rpx;
+  color: #666;
+}
+
+/* 优惠信息 */
+.promo-info {
+  display: flex;
+  align-items: center;
+  background-color: #FFF9E6;
+  padding: 15rpx 20rpx;
+  border-radius: 8rpx;
+}
+
+.promo-tag {
+  background-color: #FF6B6B;
+  color: white;
+  font-size: 24rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 20rpx;
+  margin-right: 15rpx;
+}
+
+.promo-text {
+  font-size: 26rpx;
+  color: #FF6347;
+}
+
+/* 操作按钮 */
+.action-btns {
+  display: flex;
+  justify-content: space-between;
+  padding: 30rpx;
+  background-color: #fff;
+  position: sticky;
+  bottom: 0;
+}
+
+.add-cart-btn {
+  width: 48%;
+  height: 80rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 40rpx;
+  font-size: 30rpx;
+}
+
+.detail-notice {
+  text-align: center;
+  font-size: 32rpx;
+  color: #666;
+  padding: 100rpx 0;
+}
+
+/* 相机详情页面样式 */
+page {
+  height: 100%;
+  background-color: #FAFAFA;
+}
+
+/* 相机内容 */
+.camera-content {
+  flex: 1;
+  height: 100%;
+}
+
+/* 描述区域 */
+.description-section {
+  margin-bottom: 30rpx;
+}
+
+.section-divider {
+  height: 1rpx;
+  background-color: #f0f0f0;
+  margin: 30rpx 0;
+}
+
+.description-title, .price-title, .notice-title {
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.section-icon {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 10rpx;
+}
+
+.description-content {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* 价格规则 */
+.price-section {
+  margin-bottom: 15px;
+}
+
+.price-rules {
+  margin-top: 10px;
+}
+
+.price-rule-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 14px;
+  color: #666;
+  border-bottom: 1px dashed #f0f0f0;
+}
+
+.price-rule-item:last-child {
+  border-bottom: none;
+}
+
+.price-value {
+  font-weight: 500;
+  color: #F1B7C6;
+}
+
+/* 通知区域 */
+.notice-section {
+  margin: 30rpx;
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.05);
+}
+
+.notice-list {
+  margin-top: 20rpx;
+}
+
+.notice-item {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 16rpx;
+  position: relative;
+  padding-left: 30rpx;
+}
+
+.notice-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 12rpx;
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 50%;
+  background-color: #ffb6c1;
+}
+
+/* 底部租赁按钮 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  padding: 20rpx 30rpx;
+  box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.05);
+  z-index: 100;
+}
+
+.price-display {
+  display: flex;
+  align-items: flex-end;
+}
+
+.current-price {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #ff8da1;
+}
+
+.price-unit {
+  font-size: 22rpx;
+  color: #888;
+  margin-left: 8rpx;
+  margin-bottom: 4rpx;
+}
+
+.rent-btn {
+  background: linear-gradient(to right, #ffb6c1, #ff8da1);
+  color: white;
+  font-size: 28rpx;
+  font-weight: 500;
+  padding: 16rpx 36rpx;
+  border-radius: 40rpx;
+  box-shadow: 0 4rpx 12rpx rgba(255, 141, 161, 0.3);
+}
+
+/* 相机信息部分 */
+.camera-info {
+  background-color: white;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+}
+
+.camera-details {
+  margin: 20rpx 0;
+  padding: 30rpx;
+  background-color: white;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 10rpx rgba(0, 0, 0, 0.03);
+}
+
+.details-section {
+  margin-bottom: 30rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 20rpx;
+  position: relative;
+  padding-left: 20rpx;
+}
+
+.section-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10rpx;
+  height: 28rpx;
+  width: 6rpx;
+  background-color: var(--primary-color);
+  border-radius: 3rpx;
+}
+
+.description {
+  font-size: 28rpx;
+  color: var(--text-color-light);
+  line-height: 1.7;
+}
+
+/* iOS 滚动条自定义 */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+/* 底部留白区域 */
+.bottom-space {
+  height: 140rpx;
+  width: 100%;
+}
+
+/* 调整container样式，确保内容可以完全滚动 */
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #FAFAFA;
+  padding-bottom: 160rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* 确保滚动区域包含底部内容 */
+.content-with-footer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 30rpx;
+  padding-bottom: 20rpx;
+} 

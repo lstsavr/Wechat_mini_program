@@ -1,0 +1,353 @@
+/* 订单创建页样式 */
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #FAFAFA;
+  padding-bottom: 120px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 装饰元素 */
+.decoration {
+  position: absolute;
+  opacity: 0.1;
+  z-index: 0;
+}
+
+.decoration-top-right {
+  top: -30px;
+  right: -30px;
+  width: 150px;
+  height: 150px;
+  transform: rotate(30deg);
+}
+
+.decoration-bottom-left {
+  bottom: 60px;
+  left: -50px;
+  width: 180px;
+  height: 180px;
+  transform: rotate(-15deg);
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #F1B7C6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: 14px;
+  color: #999;
+}
+
+.content {
+  padding: 15px;
+  position: relative;
+  z-index: 1;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 15px;
+  position: relative;
+  padding-left: 12px;
+}
+
+.section-title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 3px;
+  height: 16px;
+  width: 4px;
+  background-color: #E68FAA;
+  border-radius: 2px;
+}
+
+/* 相机信息区域 */
+.camera-info-section {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.camera-info {
+  display: flex;
+  align-items: center;
+}
+
+.camera-image {
+  width: 90px;
+  height: 90px;
+  border-radius: 8px;
+  margin-right: 18px;
+  background-color: #f7f7f7;
+}
+
+.camera-details {
+  flex: 1;
+}
+
+.camera-name {
+  font-size: 17px;
+  color: #333;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.camera-price {
+  font-size: 17px;
+  color: #E68FAA;
+  font-weight: 600;
+}
+
+/* 日期选择区域 */
+.date-section {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.date-picker-container {
+  margin-bottom: 18px;
+}
+
+.date-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.date-label {
+  font-size: 15px;
+  color: #666;
+  width: 90px;
+}
+
+.date-picker {
+  flex: 1;
+}
+
+.picker-content {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 0 15px;
+  font-size: 15px;
+  color: #333;
+}
+
+.picker-arrow {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #999;
+}
+
+.selected-dates-tip {
+  background-color: #f9f9f9;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 15px;
+  color: #666;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.unavailable-dates-tip {
+  background-color: #FFF5F7;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #E68FAA;
+  border: 1px dashed #F8D7E0;
+}
+
+.tip-title {
+  font-weight: 500;
+  margin-right: 5px;
+}
+
+/* 租金计算区域 */
+.rental-summary {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.summary-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.summary-content {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: #666;
+}
+
+.summary-row.total {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px dashed #e8e8e8;
+  font-weight: 500;
+  color: #333;
+}
+
+.summary-value.price {
+  font-size: 18px;
+  color: #E68FAA;
+  font-weight: 600;
+}
+
+/* 上门取件信息区域 */
+.pickup-info-section {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.pickup-form {
+  margin-top: 10px;
+}
+
+.form-item {
+  margin-bottom: 18px;
+}
+
+.form-label {
+  display: block;
+  font-size: 15px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.form-input {
+  height: 40px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 0 15px;
+  font-size: 15px;
+  color: #333;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-textarea {
+  width: 100%;
+  height: 100px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 12px 15px;
+  font-size: 15px;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.textarea-counter {
+  text-align: right;
+  font-size: 12px;
+  color: #999;
+  margin-top: 5px;
+}
+
+/* 订单信息区域 */
+.order-info-section {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* 提交按钮 */
+.submit-btn {
+  position: fixed;
+  bottom: 30px;
+  left: 20px;
+  right: 20px;
+  height: 48px;
+  background-color: #E68FAA;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(230, 143, 170, 0.4);
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.submit-btn:active {
+  background-color: #D27A96;
+  transform: translateY(2px);
+}
+
+.submit-btn[disabled] {
+  background-color: #F0C5D3;
+  color: #fff;
+  box-shadow: none;
+}
+
+/* 为iOS添加滚动条样式 */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+} 

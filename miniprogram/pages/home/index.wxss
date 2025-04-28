@@ -1,0 +1,335 @@
+/* pages/home/index.wxss */
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #FAFAFA;
+}
+
+/* 加载状态 */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loading-icon {
+  width: 60rpx;
+  height: 60rpx;
+  border: 6rpx solid #f0f0f0;
+  border-top: 6rpx solid #F1B7C6; /* 淡粉色 */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20rpx;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #999;
+}
+
+/* 内容区域 */
+.content {
+  flex: 1;
+  width: 100%;
+}
+
+/* 轮播图部分 */
+.banner-section {
+  width: 100%;
+  height: 360rpx;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 0 24rpx 24rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.banner-swiper {
+  width: 100%;
+  height: 100%;
+  transition: all 0.3s ease-in-out;
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 新用户优惠区 */
+.promo-section {
+  display: flex;
+  align-items: center;
+  background-color: #F8F2F4; /* 淡粉色背景 */
+  padding: 20rpx 30rpx;
+  margin: 0 20rpx 30rpx;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.03);
+}
+
+.promo-tag {
+  background-color: #F1B7C6; /* 淡粉色 */
+  color: white;
+  font-size: 24rpx;
+  padding: 6rpx 16rpx;
+  border-radius: 24rpx;
+  margin-right: 16rpx;
+}
+
+.promo-text {
+  font-size: 26rpx;
+  color: #666;
+}
+
+/* 分类导航部分 */
+.category-section {
+  display: flex;
+  justify-content: space-between;
+  padding: 10rpx 20rpx 30rpx;
+  background-color: #FFFFFF;
+  border-radius: 16rpx;
+  margin: 0 20rpx 30rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.03);
+}
+
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 120rpx;
+}
+
+.category-icon {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+  background-color: #F8F2F4; /* 淡粉色背景 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.icon-image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.category-name {
+  font-size: 24rpx;
+  color: #666;
+}
+
+/* 推荐相机部分 */
+.recommend-section {
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin: 0 20rpx 30rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.03);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  position: relative;
+  padding-left: 20rpx;
+}
+
+.section-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8rpx;
+  height: 32rpx;
+  width: 6rpx;
+  background-color: #F1B7C6; /* 淡粉色 */
+  border-radius: 3rpx;
+}
+
+.more-link {
+  font-size: 26rpx;
+  color: #999;
+}
+
+/* 相机列表 */
+.camera-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10rpx;
+}
+
+.camera-item {
+  width: calc(50% - 20rpx);
+  margin: 10rpx;
+  background-color: #fff;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.camera-item:active {
+  transform: scale(0.98);
+}
+
+.camera-image {
+  width: 100%;
+  height: 240rpx;
+  background-color: #f9f9f9;
+  object-fit: cover;
+}
+
+.camera-info {
+  padding: 20rpx;
+}
+
+.camera-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.camera-price {
+  margin-bottom: 8rpx;
+  text-align: center;
+}
+
+.price-value {
+  font-size: 30rpx;
+  color: #F1B7C6; /* 淡粉色 */
+  font-weight: bold;
+}
+
+.price-unit {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.camera-desc {
+  font-size: 22rpx;
+  color: #999;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.header {
+  background-color: #F1B7C6; /* 淡粉色 */
+  padding: 40rpx 30rpx 60rpx;
+  color: white;
+  position: relative;
+  border-radius: 0 0 24rpx 24rpx;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  border: 4rpx solid rgba(255, 255, 255, 0.4);
+  margin-right: 24rpx;
+}
+
+.user-detail {
+  flex: 1;
+}
+
+.nickname {
+  font-size: 38rpx;
+  font-weight: 500;
+  margin-bottom: 10rpx;
+}
+
+.welcome-text {
+  font-size: 28rpx;
+  opacity: 0.9;
+}
+
+.section {
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.05);
+  margin: 0 20rpx 30rpx;
+}
+
+.account-info {
+  padding: 10rpx 0;
+}
+
+.account-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f6f6f6;
+}
+
+.account-item:last-child {
+  border-bottom: none;
+}
+
+.item-label {
+  font-size: 30rpx;
+  color: #666;
+}
+
+.function-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10rpx;
+}
+
+.function-item {
+  width: calc(33.33% - 20rpx);
+  margin: 10rpx;
+  padding: 30rpx 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9f9f9;
+  border-radius: 8rpx;
+}
+
+.function-icon {
+  width: 60rpx;
+  height: 60rpx;
+  margin-bottom: 16rpx;
+}
+
+.function-name {
+  font-size: 28rpx;
+  color: #555;
+} 

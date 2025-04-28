@@ -1,0 +1,119 @@
+<!--pages/camera-list/index.wxml-->
+<view class="container">
+  <view class="header">
+    <view class="back-icon" bindtap="navigateBack">
+      <text class="back-arrow">←</text>
+    </view>
+    <text>相机列表</text>
+  </view>
+  
+  <view class="content">
+    <!-- 搜索框 -->
+    <view class="search-container">
+      <view class="search-input-box">
+        <icon type="search" size="16" color="#999"></icon>
+        <input 
+          class="search-input" 
+          type="text" 
+          placeholder="搜索相机名称" 
+          value="{{searchKeyword}}"
+          bindinput="onSearchInput"
+          confirm-type="search"
+          bindconfirm="onSearch"
+        />
+        <icon wx:if="{{searchKeyword.length > 0}}" type="clear" size="16" color="#999" bindtap="clearSearch"></icon>
+      </view>
+      <view class="search-btn" bindtap="onSearch">搜索</view>
+    </view>
+    
+    <!-- 筛选和排序区域 -->
+    <view class="filter-sort-container">
+      <!-- 品牌筛选器 -->
+      <view class="filter-container">
+        <view class="filter-title">品牌筛选：</view>
+        <picker 
+          bindchange="onBrandChange" 
+          value="{{brandIndex}}" 
+          range="{{brandOptions}}"
+          class="brand-picker">
+          <view class="picker-content">
+            {{brandOptions[brandIndex]}}
+            <view class="arrow-down"></view>
+          </view>
+        </picker>
+      </view>
+      
+      <!-- 价格排序按钮 -->
+      <view class="sort-container">
+        <view class="sort-title">价格排序：</view>
+        <view class="sort-buttons">
+          <view 
+            class="sort-btn {{sortType === 'asc' ? 'active' : ''}}" 
+            bindtap="onSortByPrice" 
+            data-sort="asc">
+            <text>价格升序</text>
+            <text class="sort-icon">↑</text>
+          </view>
+          <view 
+            class="sort-btn {{sortType === 'desc' ? 'active' : ''}}" 
+            bindtap="onSortByPrice" 
+            data-sort="desc">
+            <text>价格降序</text>
+            <text class="sort-icon">↓</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 加载中 -->
+    <view class="loading-container" wx:if="{{isLoading && cameraList.length === 0}}">
+      <image class="loading-image" src="/images/loading.gif" mode="aspectFit"></image>
+      <text class="loading-text">正在加载中...</text>
+    </view>
+    
+    <!-- 空状态 -->
+    <view class="empty-container" wx:elif="{{!isLoading && cameraList.length === 0}}">
+      <text class="empty-icon">📷</text>
+      <text class="empty-text">暂无相机数据</text>
+    </view>
+    
+    <!-- 相机列表 -->
+    <view wx:else class="camera-list-container">
+      <view 
+        class="camera-item" 
+        wx:for="{{cameraList}}" 
+        wx:key="id"
+        catchtap="goToCameraDetail"
+        data-id="{{item.id}}">
+        
+        <image 
+          class="camera-image" 
+          src="{{item.imageUrl}}" 
+          mode="aspectFill" 
+          lazy-load="true">
+        </image>
+        
+        <view class="camera-info">
+          <view class="camera-name">{{item.name}}</view>
+          <view class="camera-description">{{item.description}}</view>
+          <view class="camera-price">¥{{item.price}}</view>
+        </view>
+      </view>
+      
+      <!-- 底部加载状态 -->
+      <view class="loading-more" wx:if="{{isLoading}}">
+        <view class="loading-dots">
+          <view class="dot"></view>
+          <view class="dot"></view>
+          <view class="dot"></view>
+        </view>
+        <text>加载中...</text>
+      </view>
+      
+      <!-- 全部加载完成 -->
+      <view class="load-all" wx:if="{{!isLoading && !hasMore && cameraList.length > 0}}">
+        —— 已经到底啦，共{{cameraList.length}}个相机 ——
+      </view>
+    </view>
+  </view>
+</view> 

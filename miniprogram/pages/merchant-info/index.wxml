@@ -1,0 +1,158 @@
+<view class="page-wrapper">
+  <scroll-view 
+    scroll-y="true" 
+    style="height: 100vh; background-color: #f8f8f8;" 
+    enhanced="true" 
+    show-scrollbar="{{false}}"
+    scroll-anchoring="true"
+    bounces="true"
+  >
+    <!-- 加载中状态 -->
+    <view class="loading-wrapper" wx:if="{{loading}}">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">加载中...</text>
+    </view>
+
+    <!-- 加载错误状态 -->
+    <view class="error-container" wx:elif="{{loadError}}">
+      <image class="error-icon" src="/assets/icons/error.png" mode="aspectFit"></image>
+      <text class="error-text">加载失败</text>
+      <text class="error-tip">网络不佳或服务器繁忙，请稍后重试</text>
+      <view class="retry-button" bind:tap="loadMerchantInfo">重新加载</view>
+    </view>
+
+    <!-- 页面主体内容 -->
+    <view class="container" wx:else>
+      <!-- 页面标题 -->
+      <view class="page-header">
+        <text class="page-title">商铺信息</text>
+        <text class="page-subtitle">完善您的商铺信息，吸引更多顾客</text>
+      </view>
+
+      <!-- 表单内容 -->
+      <form bindsubmit="handleSubmit">
+        <view class="form-container">
+          <!-- 店铺名称 -->
+          <view class="form-item">
+            <view class="form-label">
+              <text class="required">*</text>
+              <text>店铺名称</text>
+            </view>
+            <input 
+              class="form-input {{errors.shopName ? 'input-error' : ''}}" 
+              name="shopName" 
+              value="{{formData.shopName}}" 
+              placeholder="请输入您的店铺名称" 
+              maxlength="30"
+              bindinput="handleInput"
+              data-field="shopName"
+            />
+            <view class="error-tip" wx:if="{{errors.shopName}}">{{errors.shopName}}</view>
+          </view>
+
+          <!-- 联系电话 -->
+          <view class="form-item">
+            <view class="form-label">
+              <text class="required">*</text>
+              <text>联系电话</text>
+            </view>
+            <input 
+              class="form-input {{errors.phone ? 'input-error' : ''}}" 
+              name="phone" 
+              value="{{formData.phone}}" 
+              placeholder="请输入您的联系电话" 
+              type="number"
+              maxlength="11"
+              bindinput="handleInput"
+              data-field="phone"
+            />
+            <view class="error-tip" wx:if="{{errors.phone}}">{{errors.phone}}</view>
+          </view>
+
+          <!-- 店铺地址 -->
+          <view class="form-item">
+            <view class="form-label">
+              <text class="required">*</text>
+              <text>店铺地址</text>
+            </view>
+            <input 
+              class="form-input {{errors.address ? 'input-error' : ''}}" 
+              name="address" 
+              value="{{formData.address}}" 
+              placeholder="请输入您的店铺地址" 
+              bindinput="handleInput"
+              data-field="address"
+            />
+            <view class="error-tip" wx:if="{{errors.address}}">{{errors.address}}</view>
+          </view>
+          
+          <!-- 租赁规则 -->
+          <view class="form-item">
+            <view class="form-label">
+              <text class="required">*</text>
+              <text>租赁规则</text>
+            </view>
+            <textarea 
+              class="form-textarea {{errors.rentalRules ? 'input-error' : ''}}" 
+              name="description" 
+              value="{{formData.description}}" 
+              placeholder="请输入租赁须知，例如押金政策、取还方式等" 
+              maxlength="500"
+              bindinput="handleInput"
+              data-field="description"
+              style="height: 200rpx;"
+            ></textarea>
+            <view class="textarea-counter">{{formData.description.length || 0}}/500</view>
+            <view class="error-tip" wx:if="{{errors.rentalRules}}">{{errors.rentalRules}}</view>
+          </view>
+
+          <!-- 店铺描述 -->
+          <view class="form-item">
+            <view class="form-label">
+              <text>店铺描述</text>
+            </view>
+            <textarea 
+              class="form-textarea" 
+              name="storeDescription" 
+              value="{{formData.storeDescription}}" 
+              placeholder="请输入您的店铺描述" 
+              maxlength="200"
+              bindinput="handleInput"
+              data-field="storeDescription"
+            ></textarea>
+            <view class="textarea-counter">{{formData.storeDescription.length || 0}}/200</view>
+          </view>
+
+          <!-- 营业时间 -->
+          <view class="form-item">
+            <view class="form-label">
+              <text>营业时间</text>
+            </view>
+            <input 
+              class="form-input" 
+              name="businessHours" 
+              value="{{formData.businessHours}}" 
+              placeholder="例如：周一至周日 09:00-22:00" 
+              bindinput="handleInput"
+              data-field="businessHours"
+            />
+          </view>
+        </view>
+
+        <!-- 提交按钮 -->
+        <view class="action-bar">
+          <button 
+            class="save-btn {{saving ? 'btn-loading' : ''}}" 
+            form-type="submit" 
+            disabled="{{!formValid || saving}}"
+          >
+            {{saving ? '保存中...' : '保存'}}
+          </button>
+        </view>
+      </form>
+
+      <!-- 底部安全区域 -->
+      <view class="bottom-safe-area"></view>
+    </view>
+  </scroll-view>
+</view> 

@@ -1,0 +1,71 @@
+<view class="container">
+  <!-- 页面标题 -->
+  <view class="header">
+    <text class="title">关于我们</text>
+  </view>
+  
+  <!-- 加载中状态 -->
+  <view class="loading-wrapper" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <!-- 加载错误状态 -->
+  <view class="error-container" wx:elif="{{loadError}}">
+    <image class="error-icon" src="/images/icons/question.svg" mode="aspectFit"></image>
+    <text class="error-text">加载失败</text>
+    <text class="error-tip">{{errorMsg || '网络不佳或服务器繁忙，请稍后重试'}}</text>
+    <view class="retry-button" bind:tap="reloadPage">重新加载</view>
+  </view>
+  
+  <!-- 页面内容 -->
+  <view class="content" wx:elif="{{merchantInfo}}">
+    <!-- 商户信息 -->
+    <view class="info-card">
+      <view class="shop-name">{{merchantInfo.shopName}}</view>
+      
+      <view class="info-item">
+        <text class="label">联系电话：</text>
+        <text class="value">{{merchantInfo.phone || '未设置'}}</text>
+        <view class="action-btn" bindtap="makePhoneCall" wx:if="{{merchantInfo.phone}}">拨打</view>
+      </view>
+      
+      <view class="info-item" wx:if="{{merchantInfo.address}}">
+        <text class="label">地址：</text>
+        <text class="value">{{merchantInfo.address}}</text>
+      </view>
+      
+      <view class="info-item" wx:if="{{merchantInfo.businessHours}}">
+        <text class="label">营业时间：</text>
+        <text class="value">{{merchantInfo.businessHours}}</text>
+      </view>
+      
+      <view class="divider"></view>
+      
+      <view class="description">
+        <text>{{merchantInfo.description}}</text>
+      </view>
+    </view>
+    
+    <!-- 联系我们 -->
+    <view class="contact-section">
+      <view class="section-title">联系我们</view>
+      
+      <view class="contact-item" bindtap="makePhoneCall">
+        <image class="icon" src="/images/icons/business.png" mode="aspectFit"></image>
+        <text class="text">拨打电话: {{merchantInfo.phone}}</text>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 未找到商户信息 -->
+  <view class="empty-container" wx:else>
+    <image class="empty-icon" src="/images/icons/question.svg" mode="aspectFit"></image>
+    <text class="empty-text">暂无商户信息</text>
+  </view>
+  
+  <!-- 底部信息 -->
+  <view class="footer">
+    <text class="copyright">© 2023 相机租赁 版权所有</text>
+  </view>
+</view> 

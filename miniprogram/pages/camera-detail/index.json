@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "相机详情",
+  "usingComponents": {},
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#FAFAFA",
+  "backgroundTextStyle": "dark"
+} 

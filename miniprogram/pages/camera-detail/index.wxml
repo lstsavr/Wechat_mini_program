@@ -1,0 +1,95 @@
+<!-- 相机详情页 -->
+<scroll-view scroll-y style="height: 100vh; background-color: #FAFAFA;">
+  <view class="container">
+    <!-- 返回按钮 -->
+    <view class="back-btn" bindtap="goBack">
+      <image class="back-icon" src="/images/icons/back.png" mode="aspectFit"></image>
+    </view>
+
+    <!-- 加载状态 -->
+    <view class="loading-container" wx:if="{{loading}}">
+      <view class="loading-spinner"></view>
+      <view class="loading-text">加载中...</view>
+    </view>
+
+    <!-- 错误状态 -->
+    <view class="error-container" wx:elif="{{error}}">
+      <icon type="warn" size="60" class="error-icon"></icon>
+      <view class="error-message">{{error || '获取相机信息失败'}}</view>
+      <view class="btn-retry" bindtap="loadCamera">重新加载</view>
+    </view>
+
+    <!-- 无相机信息 -->
+    <view class="error-container" wx:elif="{{!camera}}">
+      <view class="error-message">未找到相机信息</view>
+      <view class="btn-retry" bindtap="navToHome">返回首页</view>
+    </view>
+
+    <!-- 内容区域 -->
+    <block wx:elif="{{camera}}">
+      <view class="content-with-footer">
+        <!-- 相机图片 -->
+        <view class="camera-image">
+          <image src="{{camera.imageUrl}}" mode="aspectFit"></image>
+        </view>
+
+        <!-- 相机基本信息 -->
+        <view class="camera-info">
+          <view class="camera-name">{{camera.name}}</view>
+          <view class="camera-brand">{{camera.brand}}</view>
+          <view class="camera-description">{{camera.description}}</view>
+        </view>
+
+        <!-- 价格规则 -->
+        <view class="details-card">
+          <view class="card-title">租赁价格规则</view>
+          <view class="rental-rules">
+            <view class="rule-item" wx:if="{{camera.priceRules.shortTerm}}">
+              <view class="rule-days">1-2天</view>
+              <view class="rule-price">￥{{camera.priceRules.shortTerm}}/天</view>
+            </view>
+            <view class="rule-item" wx:if="{{camera.priceRules.threeDays}}">
+              <view class="rule-days">3-4天</view>
+              <view class="rule-price">￥{{camera.priceRules.threeDays}}/天</view>
+            </view>
+            <view class="rule-item" wx:if="{{camera.priceRules.fiveDays}}">
+              <view class="rule-days">5天及以上</view>
+              <view class="rule-price">￥{{camera.priceRules.fiveDays}}/天</view>
+            </view>
+          </view>
+        </view>
+
+        <!-- 租赁须知 -->
+        <view class="details-card">
+          <view class="card-title">租赁须知</view>
+          <view class="notice-list">
+            <block wx:if="{{merchantInfo && merchantInfo.description}}">
+              <view wx:for="{{descriptionLines}}" wx:key="index" class="notice-item">
+                {{item}}
+              </view>
+            </block>
+            <block wx:elif="{{rentalNotices && rentalNotices.length > 0}}">
+              <view wx:for="{{rentalNotices}}" wx:key="index" class="notice-item">
+                {{item}}
+              </view>
+            </block>
+            <block wx:else>
+              <view class="notice-item">需要提供有效身份证件办理租赁手续</view>
+              <view class="notice-item">归还时请确保设备无损坏，配件齐全</view>
+              <view class="notice-item">逾期归还将额外收取费用</view>
+              <view class="notice-item">如有任何问题，请联系客服</view>
+            </block>
+          </view>
+        </view>
+        
+        <!-- 底部留白，解决底部内容被遮挡问题 -->
+        <view class="bottom-space"></view>
+      </view>
+
+      <!-- 底部租赁按钮 -->
+      <view class="footer safe-area-bottom">
+        <button class="btn-rent" bindtap="goToRent">立即租赁</button>
+      </view>
+    </block>
+  </view>
+</scroll-view> 

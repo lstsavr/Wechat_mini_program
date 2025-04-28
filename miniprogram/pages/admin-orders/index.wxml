@@ -1,0 +1,168 @@
+<!--页面容器-->
+<view class="container">
+  <!--页面头部-->
+  <view class="page-header">
+    <text class="page-title">订单管理</text>
+  </view>
+  
+  <!--订单状态过滤-->
+  <view class="status-filter">
+    <view class="filter-tabs">
+      <view 
+        wx:for="{{statusList}}" 
+        wx:key="id" 
+        class="tab-item {{currentStatus === item.id ? 'active' : ''}}"
+        bindtap="switchStatus"
+        data-status="{{item.id}}">
+        {{item.name}}
+      </view>
+    </view>
+  </view>
+  
+  <!--订单列表内容-->
+  <view class="content">
+    <!-- 加载中 -->
+    <view class="loading-container" wx:if="{{isLoading}}">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">加载中...</text>
+    </view>
+    
+    <!-- 错误状态 -->
+    <view class="error-container" wx:elif="{{hasError}}">
+      <icon type="warn" size="64" color="#f5222d"></icon>
+      <text class="error-text">加载失败</text>
+      <view class="error-action">
+        <button class="retry-btn" bindtap="retryLoad">重新加载</button>
+      </view>
+    </view>
+    
+    <!-- 空状态 -->
+    <view class="empty-container" wx:elif="{{!orderList.length}}">
+      <image class="empty-image" src="/images/empty.png" mode="aspectFit"></image>
+      <text class="empty-text">暂无订单</text>
+    </view>
+    
+    <!-- 订单列表 -->
+    <scroll-view 
+      scroll-y="{{true}}" 
+      class="order-list" 
+      wx:elif="{{orderList.length > 0}}"
+      enable-back-to-top="{{true}}"
+      show-scrollbar="{{false}}"
+      bindscrolltolower="loadMoreOrders">
+      
+      <view class="order-card" wx:for="{{orderList}}" wx:key="_id">
+        <view class="order-header">
+          <text class="order-id">订单编号：{{item._id}}</text>
+          <text class="order-status {{item.status}}">{{statusMap[item.status].text}}</text>
+        </view>
+        
+        <view class="order-content">
+          <view class="info-item">
+            <text class="info-label">客户姓名:</text>
+            <text class="info-value">{{item.userName || item.nickname || '未填写'}}</text>
+          </view>
+          
+          <view class="info-item">
+            <text class="info-label">联系电话:</text>
+            <text class="info-value">{{item.phone || '未填写'}}</text>
+          </view>
+          
+          <view class="info-item">
+            <text class="info-label">相机名称:</text>
+            <text class="info-value">{{item.cameraName || '未知相机'}}</text>
+          </view>
+          
+          <view class="info-item">
+            <text class="info-label">租用日期:</text>
+            <text class="info-value">{{item.startDate}} 至 {{item.endDate}}</text>
+          </view>
+          
+          <view class="info-item">
+            <text class="info-label">总价格:</text>
+            <text class="info-value price">¥{{item.totalPrice}}</text>
+          </view>
+          
+          <view class="info-item">
+            <text class="info-label">下单时间:</text>
+            <text class="info-value">{{item.createTimeFormatted || '未知时间'}}</text>
+          </view>
+          
+          <view class="order-actions">
+            <button 
+              class="detail-btn"
+              bindtap="goToOrderDetail" 
+              data-id="{{item._id}}">
+              查看预约详情
+            </button>
+          </view>
+        </view>
+      </view>
+      
+      <!-- 加载更多 -->
+      <view class="load-more" wx:if="{{hasMoreOrders}}">
+        <text wx:if="{{isLoadingMore}}">加载更多...</text>
+        <text wx:else bindtap="loadMoreOrders">点击加载更多</text>
+      </view>
+    </scroll-view>
+  </view>
+  
+  <!-- 预约详情模态框 -->
+  <view class="modal-mask" wx:if="{{showReservationModal}}" bindtap="closeReservationModal">
+    <view class="modal-content" catchtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">预约详情</text>
+        <view class="modal-close" bindtap="closeReservationModal">×</view>
+      </view>
+      
+      <view class="modal-body">
+        <!-- 加载中 -->
+        <view class="loading-container" wx:if="{{isReservationLoading}}">
+          <view class="loading-spinner"></view>
+          <text class="loading-text">加载中...</text>
+        </view>
+        
+        <!-- 错误状态 -->
+        <view class="error-container" wx:elif="{{reservationError}}">
+          <icon type="warn" size="48" color="#f5222d"></icon>
+          <text class="error-text">加载失败</text>
+          <view class="error-action">
+            <button class="retry-btn" bindtap="retryLoadReservations">重新加载</button>
+          </view>
+        </view>
+        
+        <!-- 空状态 -->
+        <view class="empty-container" wx:elif="{{!reservationList.length}}">
+          <text class="empty-text">暂无预约记录</text>
+        </view>
+        
+        <!-- 预约列表 -->
+        <view class="reserved-list" wx:else>
+          <view class="reserved-item" wx:for="{{reservationList}}" wx:key="_id">
+            <view class="reserved-header">
+              <text class="reserved-id">预约ID: {{item._id}}</text>
+              <text class="reserved-status" style="color: {{item.status === 'cancelled' ? '#F5222D' : '#52C41A'}}">
+                {{item.status === 'cancelled' ? '已取消' : '已预约'}}
+              </text>
+            </view>
+            
+            <view class="reserved-date">
+              <text class="reserved-label">预约日期:</text>
+              <text class="reserved-value">{{item.formattedDateRange}}</text>
+            </view>
+            
+            <view class="reserved-footer" wx:if="{{item.canCancel}}">
+              <button 
+                class="reserved-cancel-btn" 
+                size="mini" 
+                bindtap="cancelReservation" 
+                data-id="{{item._id}}">
+                取消预约
+              </button>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view> 

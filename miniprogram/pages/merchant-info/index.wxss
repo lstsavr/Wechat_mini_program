@@ -1,0 +1,269 @@
+/* 商户信息页面样式 */
+.container {
+  width: 100%;
+  min-height: 100%;
+  background-color: #f8f8f8;
+  padding: 0 0 60rpx 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 页面头部 */
+.page-header {
+  width: 100%;
+  padding: 40rpx 40rpx 30rpx;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.05);
+  margin-bottom: 30rpx;
+  box-sizing: border-box;
+}
+
+.page-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 10rpx;
+}
+
+.page-subtitle {
+  font-size: 28rpx;
+  color: #666666;
+}
+
+/* 表单容器 */
+.form-container {
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 12rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.03);
+  padding: 30rpx 40rpx;
+  margin-bottom: 40rpx;
+  box-sizing: border-box;
+}
+
+/* 表单项 */
+.form-item {
+  margin-bottom: 30rpx;
+}
+
+.form-item:last-child {
+  margin-bottom: 0;
+}
+
+.form-label {
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  color: #333333;
+  margin-bottom: 16rpx;
+}
+
+.required {
+  color: #F1B7C6;
+  margin-right: 6rpx;
+}
+
+/* 输入框 */
+.form-input {
+  width: 100%;
+  height: 88rpx;
+  background-color: #f8f8f8;
+  border: 1rpx solid #e0e0e0;
+  border-radius: 8rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+  color: #333333;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus {
+  border-color: #F1B7C6;
+  box-shadow: 0 0 0 2px rgba(241, 183, 198, 0.1);
+}
+
+.form-input::placeholder {
+  color: #999999;
+}
+
+.input-error {
+  border-color: #ff4d4f;
+  background-color: #fff2f0;
+}
+
+/* 文本域 */
+.form-textarea {
+  width: 100%;
+  height: 200rpx;
+  background-color: #f8f8f8;
+  border: 1rpx solid #e0e0e0;
+  border-radius: 8rpx;
+  padding: 20rpx 24rpx;
+  font-size: 28rpx;
+  color: #333333;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  line-height: 1.6;
+}
+
+.form-textarea:focus {
+  border-color: #F1B7C6;
+  box-shadow: 0 0 0 2px rgba(241, 183, 198, 0.1);
+}
+
+.form-textarea::placeholder {
+  color: #999999;
+}
+
+.textarea-counter {
+  text-align: right;
+  font-size: 24rpx;
+  color: #999999;
+  margin-top: 8rpx;
+}
+
+/* 错误提示 */
+.error-tip {
+  font-size: 24rpx;
+  color: #ff4d4f;
+  margin-top: 8rpx;
+}
+
+/* 保存按钮 */
+.action-bar {
+  width: 100%;
+  padding: 30rpx 40rpx;
+  padding-bottom: calc(30rpx + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+  position: relative;
+  z-index: 10;
+}
+
+.save-btn {
+  width: 100%;
+  height: 88rpx;
+  background-color: #F1B7C6;
+  color: #ffffff;
+  font-size: 30rpx;
+  font-weight: 500;
+  border-radius: 44rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6rpx 10rpx rgba(241, 183, 198, 0.3);
+  transition: all 0.3s ease;
+}
+
+.save-btn:active {
+  transform: scale(0.98);
+}
+
+.save-btn[disabled] {
+  background-color: rgba(241, 183, 198, 0.6);
+  color: #ffffff;
+  box-shadow: none;
+}
+
+.btn-loading {
+  opacity: 0.8;
+}
+
+/* 底部安全区域 */
+.bottom-safe-area {
+  width: 100%;
+  height: calc(60rpx + env(safe-area-inset-bottom));
+}
+
+/* 加载状态 */
+.loading-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f8f8f8;
+}
+
+.loading-spinner {
+  width: 60rpx;
+  height: 60rpx;
+  border: 6rpx solid rgba(241, 183, 198, 0.2);
+  border-top: 6rpx solid #F1B7C6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20rpx;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #666666;
+}
+
+/* 错误状态 */
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40rpx;
+  background-color: #f8f8f8;
+}
+
+.error-icon {
+  width: 160rpx;
+  height: 160rpx;
+  margin-bottom: 30rpx;
+}
+
+.error-text {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #333333;
+  margin-bottom: 16rpx;
+}
+
+.error-tip {
+  font-size: 28rpx;
+  color: #666666;
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+
+.retry-button {
+  padding: 16rpx 48rpx;
+  background-color: #F1B7C6;
+  color: #ffffff;
+  font-size: 28rpx;
+  border-radius: 40rpx;
+  box-shadow: 0 4rpx 8rpx rgba(241, 183, 198, 0.3);
+}
+
+/* iOS滚动条适配 */
+::-webkit-scrollbar {
+  width: 8rpx;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(241, 183, 198, 0.3);
+  border-radius: 4rpx;
+}
+
+/* 页面基础样式 */
+.page-wrapper {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #f8f8f8;
+  position: relative;
+} 

@@ -1,0 +1,309 @@
+/* 订单详情页面样式 */
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding-bottom: 20px;
+}
+
+/* 加载中样式 */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  margin-top: 100px;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #ff6b00;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: 14px;
+  color: #999;
+}
+
+/* 错误提示样式 */
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  margin-top: 100px;
+  padding: 0 30px;
+}
+
+.error-text {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+}
+
+.retry-btn, .back-btn {
+  margin-top: 12px;
+  font-size: 14px;
+  height: 36px;
+  line-height: 36px;
+  border-radius: 18px;
+  padding: 0 20px;
+}
+
+.retry-btn {
+  background-color: #ff6b00;
+  color: white;
+}
+
+.back-btn {
+  background-color: #f0f0f0;
+  color: #666;
+}
+
+/* 订单详情样式 */
+.order-detail {
+  width: 100%;
+}
+
+/* 订单状态条 */
+.status-bar {
+  background-color: #ff6b00;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.status-icon {
+  margin-right: 10px;
+}
+
+.status-text {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* 订单详情各部分通用样式 */
+.detail-section {
+  background-color: #fff;
+  margin: 10px 15px;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 12px;
+  position: relative;
+  padding-left: 10px;
+}
+
+.section-title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 3px;
+  height: 16px;
+  width: 4px;
+  background-color: #ff6b00;
+  border-radius: 2px;
+}
+
+/* 相机信息样式 */
+.camera-info {
+  display: flex;
+  align-items: center;
+}
+
+.camera-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+}
+
+.camera-details {
+  flex: 1;
+  margin-left: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.camera-name {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.camera-id {
+  font-size: 12px;
+  color: #999;
+}
+
+/* 信息列表样式 */
+.info-list {
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.info-item:last-child {
+  margin-bottom: 0;
+}
+
+.info-label {
+  color: #666;
+  max-width: 30%;
+}
+
+.info-value {
+  color: #333;
+  max-width: 70%;
+  text-align: right;
+}
+
+.info-value.note {
+  word-break: break-all;
+  white-space: pre-wrap;
+}
+
+.info-item.total {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed #e0e0e0;
+  font-weight: 500;
+}
+
+.price {
+  color: #ff6b00;
+}
+
+/* 导航栏 */
+.nav-bar {
+  position: relative;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  padding: 0 15px;
+  margin-bottom: 10px;
+}
+
+.back-btn {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-arrow {
+  width: 10px;
+  height: 10px;
+  border-left: 2px solid #333;
+  border-bottom: 2px solid #333;
+  transform: rotate(45deg);
+}
+
+.page-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* 操作区样式 */
+.action-section {
+  margin: 20px 15px;
+}
+
+.cancel-btn {
+  background-color: #ffffff;
+  color: #ff4d4f;
+  border: 1px solid #ff4d4f;
+  height: 44px;
+  line-height: 44px;
+  border-radius: 22px;
+  font-size: 16px;
+  font-weight: 500;
+  width: 100%;
+}
+
+.note {
+  word-break: break-all;
+  white-space: pre-wrap;
+}
+
+/* 商户联系方式相关样式 */
+.merchant-info {
+  background-color: #ffffff;
+  padding: 20rpx;
+  border-radius: 8rpx;
+}
+
+.loading-mini {
+  font-size: 28rpx;
+  color: #999999;
+  text-align: center;
+  padding: 20rpx 0;
+}
+
+.empty-merchant-info {
+  font-size: 28rpx;
+  color: #999999;
+  text-align: center;
+  padding: 20rpx 0;
+}
+
+/* 状态相关样式 */
+.status-pending {
+  color: #ff6b00;
+}
+
+.status-reserved {
+  color: #52c41a; /* 绿色 - 表示已预约 */
+}
+
+.status-pending_payment {
+  color: #ff6b00;
+}
+
+.status-paid {
+  color: #52c41a;
+}
+
+.status-completed {
+  color: #1890ff;
+}
+
+.status-cancelled {
+  color: #f5222d;
+} 

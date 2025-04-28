@@ -1,0 +1,107 @@
+<view class="container">
+  <!-- 页面头部 -->
+  <view class="header">
+    <view class="header-back" bindtap="goBack">
+      <view class="back-arrow"></view>
+    </view>
+    <view class="header-title">联系客服</view>
+  </view>
+
+  <!-- 加载中状态 -->
+  <block wx:if="{{isLoading}}">
+    <view class="loading-container">
+      <view class="loading-icon"></view>
+      <view class="loading-text">加载中...</view>
+    </view>
+  </block>
+
+  <!-- 错误状态 -->
+  <block wx:elif="{{hasError}}">
+    <view class="error-container">
+      <image class="error-icon" src="/images/error.png" mode="aspectFit"></image>
+      <view class="error-text">获取商户信息失败</view>
+      <view class="error-tip">请检查网络连接后重试</view>
+      <button class="retry-button" bindtap="retry">重新加载</button>
+    </view>
+  </block>
+
+  <!-- 无数据状态 -->
+  <block wx:elif="{{!hasData}}">
+    <view class="empty-container">
+      <image class="empty-icon" src="/images/empty.png" mode="aspectFit"></image>
+      <view class="empty-text">商户暂未设置联系方式</view>
+    </view>
+  </block>
+
+  <!-- 商户联系信息 -->
+  <block wx:else>
+    <view class="contact-container">
+      <!-- 电话 -->
+      <view class="contact-card" wx:if="{{merchantInfo.phone}}">
+        <view class="contact-item">
+          <view class="contact-icon">
+            <image src="/images/icons/phone.png" mode="aspectFit"></image>
+          </view>
+          <view class="contact-content">
+            <view class="contact-label">联系电话</view>
+            <view class="contact-value">{{merchantInfo.phone}}</view>
+          </view>
+          <view class="contact-actions">
+            <view class="action-btn" bindtap="callPhone">
+              <image src="/images/icons/call.png" mode="aspectFit"></image>
+            </view>
+            <view class="action-btn" bindtap="copyToClipboard" data-type="phone">
+              <image src="/images/icons/copy.png" mode="aspectFit"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 微信号 -->
+      <view class="contact-card" wx:if="{{merchantInfo.wechatId}}">
+        <view class="contact-item">
+          <view class="contact-icon">
+            <image src="/images/icons/wechat.png" mode="aspectFit"></image>
+          </view>
+          <view class="contact-content">
+            <view class="contact-label">微信号</view>
+            <view class="contact-value">{{merchantInfo.wechatId}}</view>
+          </view>
+          <view class="contact-actions">
+            <view class="action-btn" bindtap="copyToClipboard" data-type="wechatId">
+              <image src="/images/icons/copy.png" mode="aspectFit"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 邮箱 -->
+      <view class="contact-card" wx:if="{{merchantInfo.email}}">
+        <view class="contact-item">
+          <view class="contact-icon">
+            <image src="/images/icons/email.png" mode="aspectFit"></image>
+          </view>
+          <view class="contact-content">
+            <view class="contact-label">电子邮箱</view>
+            <view class="contact-value">{{merchantInfo.email}}</view>
+          </view>
+          <view class="contact-actions">
+            <view class="action-btn" bindtap="copyToClipboard" data-type="email">
+              <image src="/images/icons/copy.png" mode="aspectFit"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 更新时间 -->
+      <view class="update-time" wx:if="{{lastUpdateTime}}">
+        更新时间：{{lastUpdateTime}}
+      </view>
+    </view>
+  </block>
+
+  <!-- 底部提示 -->
+  <view class="footer-tips">
+    <text>如有问题，请通过以上方式联系客服</text>
+  </view>
+</view> 

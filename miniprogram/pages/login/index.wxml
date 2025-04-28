@@ -1,0 +1,26 @@
+<!-- 登录页面 -->
+<view class="container">
+  <view class="logo-area">
+    <image class="logo" src="/images/logo.png" mode="aspectFit"></image>
+    <view class="app-name">微信小程序</view>
+  </view>
+
+  <!-- 用户信息展示区 -->
+  <view class="user-info" wx:if="{{isLogin}}">
+    <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+    <view class="nickname">{{userInfo.nickname || userInfo.nickName}}</view>
+    <view class="login-status">登录成功，正在跳转...</view>
+  </view>
+  
+  <!-- 登录按钮 -->
+  <view class="login-btn-wrap" wx:if="{{!isLogin}}">
+    <!-- 使用官方建议的获取用户信息接口 -->
+    <button 
+      class="login-btn" 
+      bindtap="getUserProfile">
+      <image class="wechat-icon" src="/images/wechat.png" mode="aspectFit"></image>
+      微信授权登录
+    </button>
+    <view class="tips">授权后将获取您的头像和昵称</view>
+  </view>
+</view> 

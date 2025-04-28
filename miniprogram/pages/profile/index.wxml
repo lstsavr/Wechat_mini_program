@@ -1,0 +1,92 @@
+<!-- 个人资料页面 -->
+<view class="container">
+  <!-- 页面标题 -->
+  <view class="header">
+    <text class="title">我的</text>
+  </view>
+  
+  <!-- 用户信息区域 -->
+  <view class="section user-section">
+    <view class="user-info" wx:if="{{hasUserInfo}}">
+      <image class="avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill"></image>
+      <view class="user-detail">
+        <text class="nickname">{{userInfo.nickName}}</text>
+        <text class="user-id">ID: {{userInfo.openid || '用户'}}</text>
+      </view>
+    </view>
+    
+    <view class="user-info-empty" wx:else bindtap="goToLogin">
+      <image class="avatar-placeholder" src="/images/default-avatar.png" mode="aspectFill"></image>
+      <view class="login-tip">
+        <text class="login-text">请先登录</text>
+        <text class="login-desc">登录后查看个人信息</text>
+      </view>
+      <view class="arrow-right"></view>
+    </view>
+  </view>
+  
+  <!-- 操作按钮区域 -->
+  <view class="section button-group">
+    <view class="group-title">我的服务</view>
+    
+    <view class="button-item" bindtap="goToMyOrders">
+      <view class="button-icon orders-icon">
+        <image src="/images/icons/order.png" mode="aspectFit"></image>
+      </view>
+      <view class="button-text">我的订单</view>
+      <view class="arrow-right"></view>
+    </view>
+    
+    <view class="button-item" bindtap="goToContactMerchant">
+      <view class="button-icon service-icon">
+        <image src="/images/icons/service.png" mode="aspectFit"></image>
+      </view>
+      <view class="button-text">联系客服</view>
+      <view class="arrow-right"></view>
+    </view>
+    
+    <!-- 管理员入口 -->
+    <view class="button-item" bindtap="goToAdminOrders" wx:if="{{isAdmin}}">
+      <view class="button-icon admin-icon">
+        <image src="/images/icons/service.png" mode="aspectFit"></image>
+      </view>
+      <view class="button-text">管理员控制台</view>
+      <view class="arrow-right"></view>
+    </view>
+    
+    <!-- 商户信息设置入口 -->
+    <view class="button-item" bindtap="goToMerchantInfo" wx:if="{{isAdmin}}">
+      <view class="button-icon setting-icon">
+        <image src="/images/icons/service.png" mode="aspectFit"></image>
+      </view>
+      <view class="button-text">设置商户联系方式</view>
+      <view class="arrow-right"></view>
+    </view>
+  </view>
+  
+  <!-- 其他区域（如果需要扩展） -->
+  <view class="section button-group">
+    <view class="group-title">更多服务</view>
+    
+    <view class="button-item" bindtap="goToAboutUs">
+      <view class="button-icon about-icon">
+        <image src="/images/icons/setting.svg" mode="aspectFit"></image>
+      </view>
+      <view class="button-text">关于我们</view>
+      <view class="arrow-right"></view>
+    </view>
+    
+    <view class="button-item">
+      <view class="button-icon feedback-icon">
+        <image src="/images/icons/question.svg" mode="aspectFit"></image>
+      </view>
+      <view class="button-text">意见反馈</view>
+      <view class="arrow-right"></view>
+    </view>
+  </view>
+  
+  <!-- 底部信息 -->
+  <view class="footer">
+    <text class="version">相机租赁 v1.0.0</text>
+  </view>
+</view> 

@@ -1,0 +1,74 @@
+<!-- 我的订单页面 -->
+<view class="container">
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <view class="back-btn" bindtap="navigateBack">
+      <view class="back-arrow"></view>
+    </view>
+    <text class="page-title">我的订单</text>
+  </view>
+  
+  <!-- 加载状态 -->
+  <view class="loading-container" wx:if="{{isLoading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+  
+  <!-- 错误提示 -->
+  <view class="error-container" wx:elif="{{hasError}}">
+    <icon type="warn" size="45" color="#ff6b00"></icon>
+    <text class="error-text">{{errorMsg || '获取订单失败，请重试'}}</text>
+    <button class="retry-btn" bindtap="loadOrders">重新加载</button>
+  </view>
+  
+  <!-- 空订单提示 -->
+  <view class="empty-container" wx:elif="{{isEmpty}}">
+    <icon type="info" size="45" color="#999999"></icon>
+    <text class="empty-text">暂无订单记录</text>
+    <navigator url="/pages/home/index" open-type="switchTab" class="go-home-btn">
+      去租赁相机
+    </navigator>
+  </view>
+  
+  <!-- 订单列表 -->
+  <view class="orders-list" wx:else>
+    <block wx:for="{{orders}}" wx:key="_id">
+      <view class="order-card" bindtap="goToOrderDetail" data-id="{{item._id}}">
+        <!-- 订单头部 -->
+        <view class="order-header">
+          <text class="order-id">订单号: {{item._id}}</text>
+          <text class="order-status {{item.status}}">{{statusMap[item.status]}}</text>
+        </view>
+        
+        <!-- 相机信息 -->
+        <view class="camera-info">
+          <image 
+            class="camera-image" 
+            src="{{item.cameraImage || '/images/default-goods-image.png'}}" 
+            mode="aspectFill"
+          ></image>
+          <view class="camera-details">
+            <text class="camera-name">{{item.cameraName || '未知相机'}}</text>
+            <text class="rental-date">{{item.startDate}} 至 {{item.endDate}}</text>
+          </view>
+        </view>
+        
+        <!-- 订单信息 -->
+        <view class="order-info">
+          <view class="info-row">
+            <text class="info-label">租赁天数</text>
+            <text class="info-value">{{item.rentalDays}}天</text>
+          </view>
+          <view class="info-row">
+            <text class="info-label">总价</text>
+            <text class="info-value price">¥{{item.totalPrice}}</text>
+          </view>
+          <view class="info-row">
+            <text class="info-label">下单时间</text>
+            <text class="info-value">{{item.createTimeFormatted || '未知时间'}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view> 

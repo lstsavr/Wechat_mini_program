@@ -1,0 +1,216 @@
+/* 个人资料页面样式 */
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #FAFAFA; /* 更柔和的背景色 */
+  padding-bottom: 30px;
+}
+
+/* 页面标题样式 */
+.header {
+  padding: 20px 15px;
+  background-color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* 通用区块样式 */
+.section {
+  margin: 16px 15px;
+  border-radius: 12px; /* 更大的圆角 */
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* 更柔和的阴影 */
+  overflow: hidden;
+}
+
+/* 用户信息区块 */
+.user-section {
+  padding: 0;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  padding: 25px 20px; /* 增加内边距 */
+}
+
+.avatar {
+  width: 90px; /* 更大的头像 */
+  height: 90px;
+  border-radius: 45px;
+  margin-right: 18px;
+  background-color: #f5f5f5;
+  border: 1px solid #eee;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* 头像阴影 */
+}
+
+.user-detail {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.nickname {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.user-id {
+  font-size: 14px;
+  color: #999;
+}
+
+/* 未登录状态 */
+.user-info-empty {
+  display: flex;
+  align-items: center;
+  padding: 25px 20px;
+  position: relative;
+}
+
+.avatar-placeholder {
+  width: 90px;
+  height: 90px;
+  border-radius: 45px;
+  margin-right: 18px;
+  background-color: #f5f5f5;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.login-tip {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-text {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.login-desc {
+  font-size: 14px;
+  color: #999;
+}
+
+/* 按钮组样式 */
+.button-group {
+  padding: 0;
+  margin-bottom: 20px; /* 组与组之间增加间距 */
+}
+
+.group-title {
+  font-size: 16px;
+  color: #666;
+  font-weight: 500;
+  padding: 18px 20px; /* 增加标题内边距 */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.button-item {
+  display: flex;
+  align-items: center;
+  padding: 18px 20px; /* 增加列表项内边距 */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+  transition: background-color 0.3s;
+}
+
+.button-item:active {
+  background-color: rgba(0, 0, 0, 0.03); /* 点击效果 */
+}
+
+.button-item:last-child {
+  border-bottom: none;
+}
+
+.button-icon {
+  width: 30px; /* 更大的图标区域 */
+  height: 30px;
+  margin-right: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(241, 183, 198, 0.1); /* 图标背景色 */
+  border-radius: 8px; /* 图标区域圆角 */
+  padding: 6px;
+}
+
+.button-icon image {
+  width: 22px;
+  height: 22px;
+}
+
+.button-text {
+  flex: 1;
+  font-size: 16px; /* 更大的文字 */
+  color: #333;
+  font-weight: 500;
+}
+
+/* 箭头样式 */
+.arrow-right {
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid #ccc;
+  border-right: 2px solid #ccc;
+  transform: rotate(45deg);
+  margin-right: 5px;
+  transition: transform 0.3s;
+}
+
+.button-item:active .arrow-right {
+  transform: rotate(45deg) translateX(2px); /* 箭头点击动效 */
+}
+
+/* 底部样式 */
+.footer {
+  margin-top: 40px; /* 增加顶部间距 */
+  text-align: center;
+  padding: 20px 0;
+}
+
+.version {
+  font-size: 13px;
+  color: #999;
+  opacity: 0.8;
+}
+
+/* 各类图标的特定样式 */
+.orders-icon {
+  background-color: rgba(255, 122, 166, 0.1);
+}
+
+.service-icon {
+  background-color: rgba(95, 207, 128, 0.1);
+}
+
+.admin-icon {
+  background-color: rgba(64, 158, 255, 0.1);
+}
+
+.setting-icon {
+  background-color: rgba(245, 108, 108, 0.1);
+}
+
+.about-icon {
+  background-color: rgba(144, 147, 153, 0.1);
+}
+
+.feedback-icon {
+  background-color: rgba(250, 173, 20, 0.1);
+} 

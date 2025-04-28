@@ -1,0 +1,127 @@
+<!-- 管理员订单详情页面 -->
+<view class="container">
+  <!-- 加载状态 -->
+  <view class="loading-container" wx:if="{{isLoading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+  
+  <!-- 错误提示 -->
+  <view class="error-container" wx:elif="{{hasError}}">
+    <icon type="warn" size="45" color="#ff6b00"></icon>
+    <text class="error-text">{{errorMsg || '获取订单详情失败，请重试'}}</text>
+    <button class="retry-btn" bindtap="loadOrderDetail">重新加载</button>
+    <button class="back-btn" bindtap="navigateBack">返回上一页</button>
+  </view>
+  
+  <!-- 订单详情 -->
+  <view class="order-detail" wx:elif="{{order}}">
+    <!-- 页面标题 -->
+    <view class="page-header">
+      <view class="back-btn" bindtap="navigateBack">
+        <view class="back-arrow"></view>
+      </view>
+      <text class="page-title">订单详情</text>
+    </view>
+    
+    <!-- 订单状态条 -->
+    <view class="status-bar">
+      <view class="status-icon {{order.status}}">
+        <icon type="{{order.status === 'completed' ? 'success' : (order.status === 'cancelled' ? 'warn' : 'waiting')}}" 
+              size="24" 
+              color="{{order.status === 'completed' ? '#52c41a' : (order.status === 'cancelled' ? '#f5222d' : '#ff6b00')}}"></icon>
+      </view>
+      <view class="status-text">{{statusMap[order.status] || '未知状态'}}</view>
+    </view>
+    
+    <!-- 订单ID -->
+    <view class="order-id-row">
+      <text class="order-id">订单号: {{order._id}}</text>
+      <text class="order-time">{{order.createTimeFormatted || ''}}</text>
+    </view>
+    
+    <!-- 相机信息 -->
+    <view class="detail-section">
+      <view class="section-title">相机信息</view>
+      <view class="info-item">
+        <text class="info-label">相机名称</text>
+        <text class="info-value">{{order.cameraName || '未知相机'}}</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">租赁日期</text>
+        <text class="info-value">{{order.startDate}} ~ {{order.endDate}}</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">租赁天数</text>
+        <text class="info-value">{{order.rentalDays}}天</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">日租金</text>
+        <text class="info-value">¥{{order.dailyPrice}}/天</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">总价格</text>
+        <text class="info-value price">¥{{order.totalPrice}}</text>
+      </view>
+    </view>
+    
+    <!-- 用户信息 -->
+    <view class="detail-section">
+      <view class="section-title">用户信息</view>
+      <view class="info-item">
+        <text class="info-label">姓名</text>
+        <text class="info-value">{{order.userName || '未提供'}}</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">手机号</text>
+        <text class="info-value">{{order.phone || '未提供'}}</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">备注</text>
+        <text class="info-value">{{order.note || '无'}}</text>
+      </view>
+    </view>
+    
+    <!-- 修改状态区域 -->
+    <view class="detail-section">
+      <view class="section-title">修改订单状态</view>
+      <view class="status-picker-container">
+        <picker 
+          bindchange="onStatusChange" 
+          value="{{statusIndex}}" 
+          range="{{statusOptions}}"
+          range-key="label"
+          disabled="{{isUpdating}}">
+          <view class="picker-content">
+            <text class="picker-label">当前状态:</text>
+            <view class="picker-value status-{{order.status}}">
+              {{statusMap[order.status] || '未知状态'}}
+            </view>
+            <view class="picker-arrow"></view>
+          </view>
+        </picker>
+        <button 
+          class="update-status-btn {{isUpdating ? 'disabled' : ''}}" 
+          bindtap="updateOrderStatus" 
+          disabled="{{isUpdating || newStatus === order.status}}">
+          更新状态
+        </button>
+      </view>
+    </view>
+    
+    <!-- 底部吸底操作栏 -->
+    <view class="bottom-bar">
+      <button 
+        class="cancel-order-btn {{isUpdating ? 'disabled' : ''}}" 
+        bindtap="showCancelConfirm" 
+        disabled="{{isUpdating || order.status === 'cancelled'}}">
+        取消订单
+      </button>
+      <button 
+        class="back-btn" 
+        bindtap="navigateBack">
+        返回列表
+      </button>
+    </view>
+  </view>
+</view> 

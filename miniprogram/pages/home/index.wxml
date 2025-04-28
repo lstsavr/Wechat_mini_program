@@ -1,0 +1,66 @@
+<!-- 首页 -->
+<view class="container">
+  <!-- 加载状态 -->
+  <view class="loading-container" wx:if="{{isLoading}}">
+    <view class="loading">
+      <view class="loading-icon"></view>
+      <view class="loading-text">加载中...</view>
+    </view>
+  </view>
+
+  <!-- 首页内容 -->
+  <view class="content" wx:else>
+    <!-- 轮播图 -->
+    <view class="banner-section">
+      <swiper class="banner-swiper" 
+        indicator-dots="{{true}}" 
+        autoplay="{{true}}" 
+        interval="{{3000}}" 
+        duration="{{500}}"
+        circular="{{true}}"
+        indicator-color="rgba(255, 255, 255, .5)"
+        indicator-active-color="#ffffff">
+        <swiper-item wx:for="{{banners}}" wx:key="index">
+          <image src="{{item.imageUrl}}" mode="aspectFill" class="banner-image"></image>
+        </swiper-item>
+      </swiper>
+    </view>
+    
+    <!-- 新用户优惠提示 -->
+    <view class="promo-section">
+      <view class="promo-tag">新用户特惠</view>
+      <view class="promo-text">首次租用三天及以上可享第一天一元</view>
+    </view>
+
+    <!-- 推荐相机列表 -->
+    <view class="recommend-section">
+      <view class="section-header">
+        <text class="section-title">推荐相机</text>
+        <view bindtap="goToCameraList" class="more-link">查看更多 ></view>
+      </view>
+      
+      <view class="camera-list">
+        <view class="camera-item" 
+          wx:for="{{recommendCameras}}" 
+          wx:key="_id" 
+          bindtap="goToCameraDetail" 
+          data-id="{{item._id}}">
+          <image class="camera-image" src="{{item.imageUrl}}" mode="aspectFill"></image>
+          <view class="camera-info">
+            <view class="camera-name">{{item.name}}</view>
+            <view class="camera-price">
+              <text class="price-value">¥{{item.priceRules.shortTerm}}</text>
+              <text class="price-unit">/天起</text>
+            </view>
+            <view class="camera-desc">
+              <text wx:if="{{item.priceRules.threeDays}}">三天及以上{{item.priceRules.threeDays}}元/天</text>
+            </view>
+            <view class="camera-desc">
+              <text wx:if="{{item.priceRules.fiveDays}}">五天及以上{{item.priceRules.fiveDays}}元/天</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view> 
